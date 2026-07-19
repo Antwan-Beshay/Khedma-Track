@@ -9,16 +9,18 @@ from upload import postform
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '11f92b122aeec0cdfa672a8e8f00f2c7ba29738f4da3f42f3d0db91b332e76083cd483d5052a5476dce5b9e728c8df8d94e64d28e0740192f0625c2750144849' 
+app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 
 
 def send_course_email(receiver_email, student_name, course_name, day, time):
 
-    sender_email = "antwanbeshay260@gmail.com"
-    app_password = "sgan xoca eogb bqdo"
+    sender_email = os.environ.get('GMAIL_SENDER')
+    app_password = os.environ.get('GMAIL_APP_PASSWORD')
 
     subject = "Reminder: Your class starts in 15 minutes"
 
