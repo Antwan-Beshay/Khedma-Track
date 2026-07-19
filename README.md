@@ -1,2 +1,2 @@
 # Khedma-Track
-A Flask-based attendance and course scheduling system for church service activities, using QR codes for check-in.
+A web application built with Flask that helps manage service course schedules (scouting, theater, choir, etc.) and track student/member attendance via QR code scanning. Includes role-based login for students and teachers, automatic email reminders before classes, and a teacher post-publishing feature.    
