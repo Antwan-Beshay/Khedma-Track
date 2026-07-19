@@ -1,0 +1,8 @@
+Flask
+Flask-WTF
+WTForms
+email-validator
+qrcode
+Pillow
+python-dotenv
+gunicorn
