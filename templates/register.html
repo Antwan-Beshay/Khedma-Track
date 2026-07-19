@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html> <!-- تم تحويل الاتجاه للعربية ليناسب نظامك، يمكنك إعادته لـ ltr وإنكليزي إن أردت -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"/>
+    <meta name="author" content="Antwan Beshay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1E3A5F" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title>Sps - {{ title }}</title>
+    {% else %}
+    <title>Sps</title>
+    {% endif %}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+     {% if message %}
+        <div class="danger">
+            {{message}}
+        </div>
+        {% endif %}
+
+
+    <div class="blur"></div>
+
+    <center>
+        <div class="register-card">
+            <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" alt="logo" class="flogo" />
+      
+            <form method="POST" action="{{ url_for('register') }}">
+                <!-- حماية النموذج (مهم جداً في Flask-WTF) -->
+                {{ form.hidden_tag() }} 
+
+                <legend class="form-legend">Register Form</legend>
+                
+                <!-- الاسم الأول والاسم الأخير -->
+             
+                    {{ form.fname.label(for='fname', class='form-label') }}
+                    {{ form.fname(id='fname', class='form-input', placeholder='First Name') }}
+                    {% if form.fname.errors %}
+                        {% for error in form.fname.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+                
+                    {{ form.lname.label(for='lname', class='form-label') }}
+                    {{ form.lname(id='lname', class='form-input', placeholder='Last Name') }}
+                    {% if form.lname.errors %}
+                        {% for error in form.lname.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+                
+                <!-- اسم المستخدم والبريد الإلكتروني -->
+                    {{ form.uname.label(for='uname', class='form-label') }}
+                    {{ form.uname(id='uname', class='form-input', placeholder='Username') }}
+                    <br>
+                    <br>
+                    {% if form.uname.errors %}
+                        {% for error in form.uname.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+            
+              
+                    {{ form.email.label(for='email', class='form-label') }}
+                    {{ form.email(id='email', class='form-input', placeholder='Email') }}
+                    <br>
+                    <br>
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+             
+                
+                <!-- كلمة المرور وتأكيدها -->
+                
+                    {{ form.password.label(for='password', class='form-label') }}
+                    {{ form.password(id='password', class='form-input', placeholder='Password') }}
+                     <br>
+                    <br>
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+                
+
+               
+                    <!-- يرجى مراجعة كلمة confiorm وتعديلها في كود الفلاسك أيضاً إذا كانت تحتوي على خطأ إملائي هناك -->
+                    {{ form.confirm.label(for='confirm', class='form-label') }}
+                    {{ form.confirm(id='confirm', class='form-input', placeholder='Confirm Password') }}
+                    <br>
+                     
+                    
+                    {% if form.confirm.errors %}
+                        {% for error in form.confirm.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+             
+                {{ form.role.label(class="form-label") }}
+                {{ form.role(class="form-input") }}
+                
+                {% if form.confirm.errors %}
+                        {% for error in form.confirm.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+
+
+                {{ form.submit(class='login-btn') }}
+                <br>
+                <p class="Already">Already have an account <a href="{{ url_for('login')}}" class="login">login</p>
+            </form>
+        </div>
+    </center>
+
+
+
+</body>
+</html>

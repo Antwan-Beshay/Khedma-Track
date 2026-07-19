@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <div class="attendance">
+       <img src="{{ url_for('static', filename='img/Qr code/' ~ student ~ '.png') }}" class="code" alt="Qr code">
+        <span class="name">{{student}}</span>
+    </div>
+
+    <div class="lesson">
+      
+{% for item in courses %}
+      <center>
+      <div class="lesson-card">
+        
+    <h3>{{ item.course['Name'] }}</h3>
+
+    <i class="{{ item.course['icon'] }}"></i>
+
+    <div class="time">
+        {{ item.course['start_time'] }}
+        -
+        {{ item.course['end_time'] }}
+    </div>
+
+    <div class="status">
+
+        {% if item.status == "Attendance" %}
+            <span class="present">Attendance</span>
+
+        {% elif item.status == "Going" %}
+            <span class="going">Is Going</span>
+
+        {% elif item.status == "Absent" %}
+            <span class="absent">Absent</span>
+
+        {% else %}
+            <span class="upcoming">Upcoming</span>
+        {% endif %}
+
+    </div>
+
+</div>
+<center>
+{% endfor %}
+      
+    </div>
+    <script>
+      document.getElementById('bell').onclick = function() {
+    var menu = document.getElementById('notification');
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+};
+
+setInterval(() => {
+    window.location.reload();
+}, 60000);
+    </script>
+     {% endblock %}
+  </body>
+</html>
+  

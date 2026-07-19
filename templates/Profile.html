@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<section class="profile-card">
+    
+
+        <div class="profile-header">
+            <h1>My Profile</h1>
+            <p>Personal Information</p>
+        </div>
+
+        <div class="profile-info">
+            <div class="info-item">
+                <span>First Name</span>
+                <p>{{ first }}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Last Name</span>
+                <p>{{ last }}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Username</span>
+                <p>{{ name }}</p>
+            </div>
+
+            <div class="info-item">
+                <span>Email Address</span>
+                <p>{{ mail }}</p>
+            </div>
+        </div>
+
+
+</section>
+
+{% endblock %}

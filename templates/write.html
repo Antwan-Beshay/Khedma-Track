@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="keywords"
+      content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"
+    />
+    <meta name="author" content="Antwan Beshay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1E3A5F" />
+    {% if title %}
+    <title>Sps - {{ title }}</title>
+    {% else %}
+    <title>Sps</title>
+    {% endif %}
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    
+  </head>
+  
+
+    <header>
+      </center>
+
+      <div class="lhead">
+        <img src="{{ url_for('static', filename='img/TOP_logo-removebg-preview.png')}}" alt="logo in head"  class="lhead">
+      </div>
+      
+     <div>
+      <img src="{{ url_for('static', filename='img/Bell.png')}}" class="bell" id="bell">
+    </div>
+     
+     
+     <p class="user" onclick="window.location.href='Profile.html'">{{ session.get("fname")}} {{session.get("lname")}} </p>
+     <div class="profile">
+      <img  src="{{ url_for('static', filename='img/profile.png')}}" alt="profile-icon" class="profile">
+     </div>
+
+  
+     </center>
+    </header>
+
+    <section class="notification"  id="notification">
+      <div class="message"> <center><p class="content">Message</p></center></div>
+      <div class="delet">
+        <img src="{{ url_for('static', filename='img/delet.png')}}"  class="delet"> 
+      </div>
+      </section>
+      
+    <aside>
+      <center>
+      <button  class="butn">☰</button>
+    <a href="{{url_for('write')}}">
+        <i class="bi bi-journal-check"></i>
+    </a>
+    </center>
+    </aside>
+
+    {% if message %}
+        <div class="true">
+            {{message}}
+        </div>
+        {% endif %}
+
+    {% if fmessage %}
+        <div class="danger">
+            {{fmessage}}
+        </div>
+        {% endif %}
+
+
+  
+    <form method="POST"
+          enctype="multipart/form-data"
+          action="{{ url_for('write') }}"
+          class="write">
+
+           {{ post.hidden_tag() }} 
+
+        {{ post.Title.label(for='Title', class='write-label') }}
+        {{ post.Title(id='Title', class='write-input', placeholder='Ente The Title') }}
+      
+
+       {{ post.content.label(for='content', class='write-label') }}
+       {{ post.content(id='content', class='write-input', placeholder='Enter the content') }}
+      
+    <div class="upload">
+    <label for="image" class="upload-box">
+        <i class="bi bi-cloud-upload-fill"></i>
+        <p>Choose Image</p>
+    </label>
+
+    {{ post.image(id="image", class="upload-input") }}
+</div>
+
+    {{ post.submit(class='login-btn') }}
+    
+
+    </form>
+
+
+    <script>
+      document.getElementById('bell').onclick = function() {
+    var menu = document.getElementById('notification');
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+};
+
+
+
+
+    </script>
+  </body>
+</html>
+  

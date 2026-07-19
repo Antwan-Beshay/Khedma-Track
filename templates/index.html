@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+      name="keywords"
+      content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"
+    />
+    <meta name="author" content="Antwan Beshay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1E3A5F" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="5;url={{ url_for('Main') }}" />
+    {%if title%}
+    <title>Sps - {{title}}</title>
+    {%else%}
+    <title>Sps</title>
+    {%endif%}
+     <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+    <div class="blur"></div>
+    <main>
+    <center>
+      <div class="loader">
+        <img src="{{ url_for('static', filename='img/logo-removebg-preview.png') }}" alt="logo" class="logo" />
+        <h1 class="welcome">Welcome to the Service Preparation System</h1>
+        <h2 class="loading">loading</h2>
+        <h2 class="timer-text"></h2>
+      </div>
+    </main>
+    </center>
+</body>
+</html>

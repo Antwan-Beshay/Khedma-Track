@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Course</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+<center>
+<div class="containe">
+
+    <h2>Select Your Course</h2>
+
+    <form action="{{ url_for('save_attendance') }}" method="POST">
+
+        <input type="hidden" name="token" value="{{ token }}">
+
+        {% for course in courses %}
+
+        <div class="course" for="choose">
+
+            <input
+                id="choose"
+                type="radio"
+                name="course_id"
+                value="{{ course['id'] }}"
+                required>
+
+            <div class="course-info">
+
+                <h3>{{ course["Name"] }}</h3>
+
+                <p>
+                    🕒 {{ course["start_time"] }}
+                    -
+                    {{ course["end_time"] }}
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        <button type="submit" class="conf">
+            Confirm Attendance
+        </button>
+
+    </form>
+
+</div>
+</center>
+
+<script>
+    document.querySelectorAll(".course").forEach(card => {
+    card.addEventListener("click", () => {
+        card.querySelector('input[type="radio"]').checked = true;
+    });
+});
+</script>
+
+</body>
+</html>

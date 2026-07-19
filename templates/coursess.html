@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <select onchange="location=this.value" class="choose" width="50px">
+    <option value="" class="form-label">Choose Day</option>
+    <option value="{{ url_for('today', day='Saturday') }}" class="form-input">Saturday</option>
+    <option value="{{ url_for('today', day='Sunday') }}" class="form-input">Sunday</option>
+    <option value="{{ url_for('today', day='Monday') }}" class="form-input">Monday</option>
+    <option value="{{ url_for('today', day='Tuesday') }}" class="form-input">Tuesday</option>
+    <option value="{{ url_for('today', day='Wednesday') }}" class="form-input">Wednesday</option>
+    <option value="{{ url_for('today', day='Thursday') }}" class="form-input">Thursday</option>
+    <option value="{{ url_for('today', day='Friday') }}" class="form-input">Friday</option>
+</select>
+
+  <div class="day">
+  
+    {% if day %}
+        {{ day }}
+    {% else %}
+        All courses
+    {% endif %}
+
+
+    </div>
+    <div class="courses-container">
+    {% for course in courses %}
+    <div class="course-card">
+      <center>
+      <h3>{{ course['Name'] }}</h3>
+        <i class="{{ course['icon'] }}"></i>
+
+        <div class="time">
+            {{course['start_time'] ~  "  to  "  ~ course['end_time'] }}
+          
+        </div>
+        </center>
+    </div>
+    {% endfor %}
+</div>
+    <script>
+      document.getElementById('bell').onclick = function() {
+    var menu = document.getElementById('notification');
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+};
+
+
+    </script>
+
+    {% endblock %}
+  </body>
+</html>
+  

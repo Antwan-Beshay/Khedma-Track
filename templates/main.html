@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+      name="keywords"
+      content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"
+    />
+    <meta name="author" content="Antwan Beshay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1E3A5F" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%if title%}
+    <title>Sps - {{title}}</title>
+    {%else%}
+    <title>Sps</title>
+    {%endif%}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+
+</head>
+<body>
+    <main>
+      <center>
+        <div class="img-card">
+        <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" alt="logo" class="toplogo" width="200" />
+        </div>
+        <h2 class="welcome"> Welcome</h2>
+        <button class="login-btn" onclick="window.location.href='register'">login</button>
+         <button class="login-btn" onclick="window.location.href='Login'">Sign Up</button>
+      </center>
+    </main>
+</body>
+</html>

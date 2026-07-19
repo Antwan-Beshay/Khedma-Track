@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html> <!-- تم تحويل الاتجاه للعربية ليناسب نظامك، يمكنك إعادته لـ ltr وإنكليزي إن أردت -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"/>
+    <meta name="author" content="Antwan Beshay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1E3A5F" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title>Sps - {{ title }}</title>
+    {% else %}
+    <title>Sps</title>
+    {% endif %}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+    {% if message %}
+        <div class="danger">
+            {{message}}
+        </div>
+        {% endif %}
+
+        
+
+
+    <div class="blur"></div>
+
+    <center>
+        <div class="register-card">
+            <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" alt="logo" class="flogo" />
+      
+            <form method="POST" action="{{ url_for('login') }}">
+                <!-- حماية النموذج (مهم جداً في Flask-WTF) -->
+                {{ form.hidden_tag() }} 
+
+                <legend class="form-legend">Login Form</legend>
+                
+                <!-- الاسم الأول والاسم الأخير -->
+             
+                    
+                    {{ form.mail.label(for='uname', class='form-label') }}
+                    {{ form.mail(id='uname', class='form-input', placeholder='Email') }}
+                    <br>
+                    <br>
+                    {% if form.mail.errors %}
+                        {% for error in form.mail.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+            
+                            
+                    {{ form.password.label(for='password', class='form-label') }}
+                    {{ form.password(id='password', class='form-input', placeholder='Password') }}
+                     <br>
+                    <br>
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+                    {% endif %}
+                {{ form. submit(class='login-btn') }}
+                <br>
+                <p class="forget"><a href="#">Forget Password<p></a>
+                <p class="Already"> Do not have  an account <a href="{{ url_for('register')}}" class="login">Sign up</p>
+            </form>
+        </div>
+    </center>
+
+</body>
+</html>

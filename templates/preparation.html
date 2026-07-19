@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+    {% for post in cpost %}
+<div class="post">
+
+    <img src="{{ url_for('static', filename='img/course/' + post['img']) }}">
+
+    <h2>{{ post['title'] }}</h2>
+
+    <p>{{ post['content'] }}</p>
+
+    <small>By {{ post['teacher'] }}</small>
+
+</div>
+{% endfor %}
+
+    <script>
+      document.getElementById('bell').onclick = function() {
+    var menu = document.getElementById('notification');
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+};
+
+
+
+    </script>
+    
+
+    {% endblock %}
+
+    </body>
+    </html>
+    
