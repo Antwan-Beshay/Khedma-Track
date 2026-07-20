@@ -235,7 +235,7 @@ def Profile():
     fname = session["fname"]
     lname =  session["lname"]
     user= session["username"]
-    email = session["email"]
+    email = session.get('mail') or session.get('email')
     
 
     return render_template("Profile.html", title="Profile", first=fname , last=lname, name=user, mail=email)
@@ -507,7 +507,7 @@ def Dashboard():
     now = now_egypt()
     current_day = now.strftime("%A")
     current_time = now.strftime("%H:%M")
-    Email = session.get('mail')
+    Email = session.get('mail') or session.get('email')
     user =session.get('username')
 
     conn = get_db_connection()
