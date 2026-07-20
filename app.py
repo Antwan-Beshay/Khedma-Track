@@ -534,7 +534,8 @@ def Dashboard():
         ).replace(
             year=now.year,
             month=now.month,
-            day=now.day
+            day=now.day,
+            tzinfo=ZoneInfo("Africa/Cairo")
         )
         remaining = start_time - now
         total_seconds = int(remaining.total_seconds())
@@ -555,7 +556,8 @@ def Dashboard():
         ).replace(
             year=now.year,
             month=now.month,
-            day=now.day
+            day=now.day,
+            tzinfo=ZoneInfo("Africa/Cairo")
         )
 
         remaining = start_time - now
