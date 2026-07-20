@@ -11,13 +11,18 @@ from email.mime.text import MIMEText
 from email.header import Header
 import os
 from dotenv import load_dotenv
+from zoneinfo import ZoneInfo
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
 
 
-def send_course_email(receiver_email, student_name, course_name, day, time):
+def now_egypt():
+    return datetime.datetime.now(ZoneInfo("Africa/Cairo"))
+    
+
+def send_course_email(receiver_email, student_name, course_name, day, time, base_url):
 
     sender_email = os.environ.get('GMAIL_SENDER')
     app_password = os.environ.get('GMAIL_APP_PASSWORD')
@@ -55,7 +60,7 @@ def send_course_email(receiver_email, student_name, course_name, day, time):
 
             <br>
 
-            <a href="http://127.0.0.1:5000/login"
+            <a href="{base_url}login"
                style="background:#0d6efd;color:white;padding:12px 22px;text-decoration:none;border-radius:8px;">
                فتح النظام
             </a>
@@ -246,12 +251,14 @@ def coursess():
 @app.route("/Today")
 def Today():
     conn = get_db_connection()
-    now = datetime.date.today()
+    now = now_egypt()
+
     word = now.strftime("%A")
     available_courses = conn.execute(
     "SELECT * FROM coursess WHERE day = ?",
     (word,)
 ).fetchall()
+    conn.close()
     return render_template("Today.html", title="Today",today=word , courses=available_courses )
 
 
@@ -290,13 +297,14 @@ def attendance():
         border=8
     )
     # نضع داخل الـ QR رابط دالة فحص السكاّن (التي سنصنعها بالأسفل)
-    qr.add_data(f"http://127.0.0.1:5000/attendance/{token}")
+    qr.add_data(f"{request.host_url}attendance/{token}")
     qr.make(fit=True)
     img = qr.make_image(fill_color="#000000", back_color="white")
+    os.makedirs("static/img/Qr code", exist_ok=True)
     img.save(f"static/img/Qr code/{uname}.png")
     
     # 2. جلب تاريخ ووقت السيرفر الحالي
-    now = datetime.datetime.now()
+    now = now_egypt()
     current_day = now.strftime("%A")     # اسم اليوم (مثال: Thursday)
     current_time = now.strftime("%H:%M")        # الوقت الحالي (ساعة، دقيقة)
 
@@ -345,7 +353,7 @@ def attendance():
     
 @app.route("/attendance/<token>")
 def attendance_check(token):
-    now = datetime.datetime.now()
+    now = now_egypt()
     current_day = now.strftime("%A")
     current_time = now.strftime("%H:%M")
     today = now.strftime("%Y-%m-%d")
@@ -445,7 +453,7 @@ def save_attendance():
     token = request.form["token"]
     course_id = request.form["course_id"]
 
-    now = datetime.datetime.now()
+    now = now_egypt()
     current_time = now.strftime("%H:%M")
     today = now.strftime("%Y-%m-%d")
 
@@ -496,7 +504,7 @@ def save_attendance():
             
 @app.route("/Dashboard")
 def Dashboard():
-    now = datetime.datetime.now()
+    now = now_egypt()
     current_day = now.strftime("%A")
     current_time = now.strftime("%H:%M")
     Email = session.get('mail')
@@ -534,7 +542,7 @@ def Dashboard():
         hours = total_seconds // 3600
         minutes = (total_seconds % 3600) // 60
 
-    now = datetime.datetime.now()
+    now = now_egypt()
 
     notification = None
 
@@ -576,7 +584,8 @@ def Dashboard():
                     student_name=user,
                     course_name=next_course["Name"],
                     day=next_course["day"],
-                    time=next_course["start_time"]
+                    time=next_course["start_time"],
+                    base_url=request.host_url
                 )
 
                 session["email_sent"] = True
