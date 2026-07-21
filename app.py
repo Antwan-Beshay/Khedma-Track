@@ -126,7 +126,7 @@ def login():
             session["username"] = user['uname']
             session["qr_token"] = user['qr_token']
             next_url = session.pop("next_url", None)
-             if next_url:
+            if next_url:
                 return redirect(next_url)
             role = session['role']
             if role == "student" or  role == "Student" :
