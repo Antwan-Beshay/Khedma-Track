@@ -125,6 +125,9 @@ def login():
             session['lname'] = user['lname']
             session["username"] = user['uname']
             session["qr_token"] = user['qr_token']
+            next_url = session.pop("next_url", None)
+             if next_url:
+                return redirect(next_url)
             role = session['role']
             if role == "student" or  role == "Student" :
                 return redirect(url_for("Dashboard"))
@@ -631,15 +634,15 @@ def require_login():
         "register",
         "Main",
         "static",
-        "attendance"
-]
+    ]
 
     if request.endpoint in allowed_routes:
         return
 
     if "username" not in session:
+        session["next_url"] = request.url
         return redirect(url_for("login"))
-
+        
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
 
