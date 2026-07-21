@@ -19,13 +19,17 @@
     <div class="countdown">
 
         <div class="time-box">
-            <span class="number" id="timer-hours">{{ hours }}</span>
+            <span class="number" id="hours"></span>
             <span class="label1">hrs</span>
         </div>
 
         <div class="time-box">
-            <span class="number" id="timer-minutes">{{ minutes }}</span>
+            <span class="number" id="minutes"></span>
             <span class="label1">min</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="seconds"></span>
+            <span class="label1">sec</span>
         </div>
 
     </div>
@@ -42,20 +46,99 @@
 
 
 <p class="welcoming">Wellcome back <p class="wuser">{{user}}</p></p>
-    <script>
-    document.getElementById('bell').onclick = function() {
-    var menu = document.getElementById('notification');
-    if (menu.style.display === "none" || menu.style.display === "") {
-        menu.style.display = "block";
-    } else {
-        menu.style.display = "none";
-    }
-};
 
-setInterval(() => {
-    window.location.reload();
-}, 55000); // كل دقيقة
+
+<div class="attendance-card">
+
+    <div class="attendance-header">
+        <i class="bi bi-calendar-check"></i>
+        <h3>Attendance Summary</h3>
+    </div>
+
+    <div class="attendance-row">
+        <span>Present</span>
+        <strong>{{ present }}</strong>
+    </div>
+
+    <div class="attendance-row">
+        <span>Absent</span>
+        <strong>{{ absent }}</strong>
+    </div>
+
+   
+    
+
+    <div class="progress">
+        <div class="progress-fill"
+             style="width: {{ attendance_rate }}%;"></div>
+    </div>
+
+    <p class="rate">{{ attendance_rate }}% Attendance Rate</p>
+
+</div>
+
+<div class="attendance-chart-card">
+
+    <h3>Attendance Overview</h3>
+
+    <canvas id="attendanceChart"></canvas>
+
+</div>
+
+{% if next_course %}
+<script>
+
+    let remaining = {{ remaining_seconds }} ;
+
+    function updateTimer() {
+
+        if (remaining <= 0) {
+            location.reload();   // عندما ينتهي الوقت اجلب الكورس الجديد
+            return;
+        }
+
+        let hrs = Math.floor(remaining / 3600);
+        let mins = Math.floor((remaining % 3600) / 60);
+        let secs = remaining % 60;
+
+        document.getElementById("hours").textContent = String(hrs).padStart(2,"0");
+        document.getElementById("minutes").textContent = String(mins).padStart(2,"0");
+        document.getElementById("seconds").textContent = String(secs).padStart(2,"0");
+
+        remaining--;
+    }
+
+    updateTimer();
+    setInterval(updateTimer,1000);
     </script>
+
+    <script>
+    const ctx = document.getElementById('attendanceChart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent'],
+            datasets: [{
+                data: [{{ present }}, {{ absent }}],
+                backgroundColor: [
+                    '#22c55e',
+                    '#ef4444'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            cutout: '70%'
+        }
+    });
+</script>
+    {% endif %}
     {% endblock %}
 
   </body>
