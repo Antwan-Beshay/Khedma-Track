@@ -19,13 +19,17 @@
     <div class="countdown">
 
         <div class="time-box">
-            <span class="number" id="timer-hours">{{ hours }}</span>
+            <span class="number" id="hours"></span>
             <span class="label1">hrs</span>
         </div>
 
         <div class="time-box">
-            <span class="number" id="timer-minutes">{{ minutes }}</span>
+            <span class="number" id="minutes"></span>
             <span class="label1">min</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="seconds"></span>
+            <span class="label1">sec</span>
         </div>
 
     </div>
@@ -51,11 +55,34 @@
         menu.style.display = "none";
     }
 };
+</script>
+{% if next_course %}
+<script>
 
-setInterval(() => {
-    window.location.reload();
-}, 55000); // كل دقيقة
+    let remaining = {{ remaining_seconds }} ;
+
+    function updateTimer() {
+
+        if (remaining <= 0) {
+            location.reload();   // عندما ينتهي الوقت اجلب الكورس الجديد
+            return;
+        }
+
+        let hrs = Math.floor(remaining / 3600);
+        let mins = Math.floor((remaining % 3600) / 60);
+        let secs = remaining % 60;
+
+        document.getElementById("hours").textContent = String(hrs).padStart(2,"0");
+        document.getElementById("minutes").textContent = String(mins).padStart(2,"0");
+        document.getElementById("seconds").textContent = String(secs).padStart(2,"0");
+
+        remaining--;
+    }
+
+    updateTimer();
+    setInterval(updateTimer,1000);
     </script>
+    {% endif %}
     {% endblock %}
 
   </body>
