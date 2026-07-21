@@ -626,6 +626,13 @@ def preparation ():
 
 
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    message = "You are loging out "
+    return redirect(url_for("login"),message=message )
+
+
 @app.before_request
 def require_login():
     allowed_routes = [
