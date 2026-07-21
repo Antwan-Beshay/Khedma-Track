@@ -46,6 +46,45 @@
 
 
 <p class="welcoming">Wellcome back <p class="wuser">{{user}}</p></p>
+
+
+<div class="attendance-card">
+
+    <div class="attendance-header">
+        <i class="bi bi-calendar-check"></i>
+        <h3>Attendance Summary</h3>
+    </div>
+
+    <div class="attendance-row">
+        <span>Present</span>
+        <strong>{{ present }}</strong>
+    </div>
+
+    <div class="attendance-row">
+        <span>Absent</span>
+        <strong>{{ absent }}</strong>
+    </div>
+
+   
+    
+
+    <div class="progress">
+        <div class="progress-fill"
+             style="width: {{ attendance_rate }}%;"></div>
+    </div>
+
+    <p class="rate">{{ attendance_rate }}% Attendance Rate</p>
+
+</div>
+
+<div class="attendance-chart-card">
+
+    <h3>Attendance Overview</h3>
+
+    <canvas id="attendanceChart"></canvas>
+
+</div>
+
     <script>
     document.getElementById('bell').onclick = function() {
     var menu = document.getElementById('notification');
@@ -82,6 +121,33 @@
     updateTimer();
     setInterval(updateTimer,1000);
     </script>
+
+    <script>
+    const ctx = document.getElementById('attendanceChart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Present', 'Absent'],
+            datasets: [{
+                data: [{{ present }}, {{ absent }}],
+                backgroundColor: [
+                    '#22c55e',
+                    '#ef4444'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            },
+            cutout: '70%'
+        }
+    });
+</script>
     {% endif %}
     {% endblock %}
 
