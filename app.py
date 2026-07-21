@@ -521,7 +521,7 @@ def Dashboard():
         LIMIT 1
     """, (current_day, current_time)).fetchone()
 
-    remaining_time = None
+    remaining_seconds = None
     hours = 0
     minutes = 0
     remaining = None
@@ -538,10 +538,7 @@ def Dashboard():
             tzinfo=ZoneInfo("Africa/Cairo")
         )
         remaining = start_time - now
-        total_seconds = int(remaining.total_seconds())
-
-        hours = total_seconds // 3600
-        minutes = (total_seconds % 3600) // 60
+        remaining_seconds = int(remaining.total_seconds())
 
     now = now_egypt()
 
@@ -603,7 +600,7 @@ def Dashboard():
 
     user = session['username']
     return render_template("Dashboard.html",title="Dashboard",next_course=next_course,hours=f"{hours:02}",
-    minutes=f"{minutes:02}" , notification=notification , user=user)
+    minutes=f"{minutes:02}" , notification=notification , user=user,remaining_seconds=remaining_seconds)
 
 
 
