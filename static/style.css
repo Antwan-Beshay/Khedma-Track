@@ -512,8 +512,9 @@ header{
     top: 10px;
     left: 750px;
     color: var(--text-main);
-
 }
+    
+
 
 .reddot {
     position: fixed;
@@ -580,12 +581,14 @@ header{
 }
 
 .profile{
+    position: fixed;
+    top: 0;
+    left: 650px;
     height: auto;
     margin-top: auto;
     width: 40px;
-    position: relative;
-    top: 0;
-    left:  240px;
+   
+    
 }
 
 aside{
@@ -1371,4 +1374,88 @@ button:active {
     .course-info h3 {
         font-size: 18px;
     }
+}
+
+.attendance-card {
+    position: absolute;
+    top: 200px;
+    left: 150px;
+    width: 400px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    border: 1px solid #ececec;
+}
+
+.attendance-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.attendance-header i {
+    color: #0d6efd;
+    font-size: 28px;
+}
+
+.attendance-header h3 {
+    margin: 0;
+    font-size: 22px;
+    color: #1e293b;
+}
+
+.attendance-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0;
+    font-size: 18px;
+}
+
+.attendance-row span {
+    color: #64748b;
+}
+
+.attendance-row strong {
+    color: #0f172a;
+    font-size: 20px;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 30px;
+    overflow: hidden;
+    margin-top: 25px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 30px;
+}
+
+.rate {
+    margin-top: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.attendance-chart-card {
+     position: absolute;
+    top: 500px;
+    left: 150px;
+    width: 340px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+}
+
+.attendance-chart-card h3 {
+    margin-bottom: 20px;
 }
