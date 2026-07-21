@@ -630,8 +630,9 @@ def require_login():
         "login",
         "register",
         "Main",
-        "static",   # مهم جدًا
-    ]
+        "static",
+        "attendance"
+]
 
     if request.endpoint in allowed_routes:
         return
