@@ -95,6 +95,7 @@ body {
     animation: pulse-slow 2s infinite ease-in-out;
 
 }
+
 @keyframes pulse-slow {
 
     0%,
@@ -239,8 +240,8 @@ body {
 =========================== */
 
 .register-card {
-   
-    
+
+
     width: 600px;
     background: var(--bg-card);
     border: 10px solid #EEF2F7;
@@ -253,10 +254,11 @@ body {
 }
 
 .register-card:hover {
-  
+
     transform: scale(1.02);
     transition: .3s ease;
 }
+
 /* ===========================
    Logo
 =========================== */
@@ -309,11 +311,11 @@ body {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--text-main);
-  
+
 }
 
-.form-label::before{
-    
+.form-label::before {
+
     content: "*";
     color: var(--danger-color);
     margin-left: 2px;
@@ -345,7 +347,7 @@ body {
     box-shadow: 0 0 0 4px rgba(0, 102, 204, .15);
 }
 
-.form-input:active{
+.form-input:active {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(0, 102, 204, .15);
@@ -406,29 +408,13 @@ body {
     background-color: var(--danger-color);
     color: #ffffff;
     animation: fadeOut 5s forwards;
-        }
- 
-.error{
+}
+
+.error {
     display: inline-block;
 }
 
 
-
-
-.true {
-    text-align: center;
-    font-size: 15px;
-    font-weight: bolder;
-    padding: 5px;
-    padding-top: 5px;
-    position: absolute;
-    top: 5px;
-    left: 76%;
-    width: auto;
-    color: white;
-    background-color:var(--success-color) ;
-    
-}
 
 @keyframes fadeOut {
     0% {
@@ -449,36 +435,37 @@ body {
     }
 }
 
-.field-error{
+.field-error {
     color: var(--danger-color);
     margin-top: 5px;
     margin-bottom: 6px;
     display: block;
 }
 
-.Already{
+.Already {
     color: var(--primary-color);
     text-align: center;
 }
-.login{
+
+.login {
     color: var(--primary-hover);
     text-decoration: underline;
     text-align: center;
 }
 
-.forget{
+.forget {
     color: var(--text-main);
     text-decoration: underline;
     text-align: center;
 
 }
 
-header{
+header {
     display: flex;
     background-color: var(--bg-card);
     width: 80%;
     height: 50px;
-    margin-left: 10%; 
+    margin-left: 10%;
     border: 10px solid #EEF2F7;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .20);
@@ -486,10 +473,10 @@ header{
     -webkit-backdrop-filter: blur(12px);
     z-index: 7;
     overflow: hidden;
-    
+
 }
 
-.bell{
+.bell {
     position: relative;
     top: 0;
     left: 860px;
@@ -500,20 +487,20 @@ header{
 
 }
 
-.lhead{
+.lhead {
     margin-top: 4px;
     margin-left: 6px;
     width: 40px;
 }
 
-.user{
+.user {
     font-weight: bolder;
     position: absolute;
     top: 10px;
     left: 750px;
     color: var(--text-main);
 }
-    
+
 
 
 .reddot {
@@ -528,7 +515,7 @@ header{
     display: inline-block;
 }
 
-.notification{
+.notification {
     position: fixed;
     top: 80px;
     right: 20px;
@@ -538,7 +525,7 @@ header{
 
     background: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
 
     padding: 15px;
 
@@ -575,41 +562,41 @@ header{
     transform: scale(1.1);
 }
 
-.content{
+.content {
     color: var(--text-main);
     font-weight: bolder;
 }
 
-.profile{
+.profile {
     position: fixed;
     top: 0;
     left: 650px;
     height: auto;
     margin-top: auto;
     width: 40px;
-   
-    
+
+
 }
 
-aside{
+aside {
     display: block;
     position: fixed;
     top: 0;
     left: 10px;
     background-color: var(--bg-card);
-    width:80px ;
+    width: 80px;
     height: 800px;
     border: 10px solid #EEF2F7;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, .20);
-   
+
 
 }
 
 
-.butn{
+.butn {
     width: 50px;
-    padding: 10px , 20px;
+    padding: 10px, 20px;
     display: block;
     margin-top: 15px;
     margin-bottom: 20px;
@@ -619,7 +606,7 @@ aside{
     background-color: var(--text-main);
     border: 2px var(--border-color);
     border-radius: 20px;
-        
+
 }
 
 .butn:hover {
@@ -630,12 +617,13 @@ aside{
 
 }
 
-.butn:active  {
+.butn:active {
     background-color: var(--primary-hover);
     transform: scale(1.2);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
-.bi{
+
+.bi {
 
     font-size: 30px;
     display: block;
@@ -644,6 +632,7 @@ aside{
     width: 50px;
     color: var(--text-main);
 }
+
 .active {
     font-size: 30px;
     margin-top: 20px;
@@ -652,6 +641,7 @@ aside{
     display: block;
     color: var(--primary-color);
 }
+
 aside a.active {
     font-size: 30px;
     margin-top: 20px;
@@ -683,7 +673,7 @@ aside a.active {
 .course-card {
     width: 250px;
     padding: 20px;
-    background:var(--bg-card);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
     text-align: center;
@@ -698,7 +688,7 @@ aside a.active {
 
 .course-card i {
     font-size: 45px;
-    color: var(--primary-color) ;
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 
@@ -708,11 +698,11 @@ aside a.active {
 }
 
 .time {
-    color:var(--text-main);
+    color: var(--text-main);
 }
 
 
-.today{
+.today {
     margin-bottom: 50px;
     position: absolute;
     top: 80px;
@@ -721,9 +711,10 @@ aside a.active {
     font-size: xx-large;
     font-weight: bolder;
     text-align: center;
-    text-decoration: underline;}
+    text-decoration: underline;
+}
 
-.choose{
+.choose {
     margin-bottom: 15px;
     margin-top: 10px;
     margin-left: 200px;
@@ -737,11 +728,11 @@ aside a.active {
     transition: all .3s ease;
     box-sizing: border-box;
     color: var(--text-main);
-    
-                
-    }
 
-.day{
+
+}
+
+.day {
     margin-bottom: 50px;
     position: absolute;
     top: 140px;
@@ -753,22 +744,22 @@ aside a.active {
     text-decoration: underline;
 }
 
-.code{
+.code {
     width: 50vh;
     height: 40vh;
     position: relative;
     top: 50px;
     left: 50vh;
-    background:var(--bg-card);
+    background: var(--bg-card);
     border-radius: 35px;
     box-shadow: 0px 0px 20px 9px rgba(0, 0, 0, 2.15);
     transition: .3s;
-    
 
-    
+
+
 }
 
-.name{
+.name {
     font-size: x-large;
     font-weight: bolder;
     color: var(--text-main);
@@ -776,14 +767,15 @@ aside a.active {
     top: 90px;
     left: 100px;
     text-align: center;
-    
-    
+
+
 }
 
-.lesson{
-     display: flex;
-    flex-direction: column; 
-    overflow-x: auto;    /* شريط تمرير أفقي */
+.lesson {
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    /* شريط تمرير أفقي */
     gap: 15px;
     position: fixed;
     top: 80px;
@@ -798,17 +790,17 @@ aside a.active {
     margin-top: 20px;
 }
 
-.lesson-card{
+.lesson-card {
     margin-left: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
     width: 230px;
     padding: 20px;
-    background:var(--bg-card);
+    background: var(--bg-card);
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
     transition: .3s;
-    
+
 
 }
 
@@ -836,6 +828,7 @@ aside a.active {
     font-size: 15px;
     font-weight: bold;
 }
+
 .present {
     background: #d1fae5;
     color: #047857;
@@ -943,7 +936,7 @@ aside a.active {
     text-transform: uppercase;
 }
 
-.welcoming{
+.welcoming {
     position: absolute;
     top: 100px;
     left: 150px;
@@ -952,7 +945,7 @@ aside a.active {
     color: var(--text-main);
 }
 
-.wuser{
+.wuser {
     position: absolute;
     top: 100px;
     left: 400px;
@@ -960,7 +953,7 @@ aside a.active {
     font-size: xx-large;
     font-weight: bolder;
 
-    
+
 }
 
 .write {
@@ -984,7 +977,7 @@ aside a.active {
     font-size: 1.1rem;
     font-weight: bold;
     color: var(--text-main);
-    
+
 }
 
 .write-label::before {
@@ -1157,12 +1150,12 @@ aside a.active {
     color: #0d6efd;
 }
 
-.No{
+.No {
     color: var(--text-main);
     text-align: center;
     font-size: xx-large;
     font-weight: bolder;
-    
+
 }
 
 .profile-card {
@@ -1290,7 +1283,7 @@ h2 {
     font-size: 30px;
 }
 
-.course{
+.course {
     margin-left: 10%;
     width: 80%;
     display: flex;
@@ -1446,7 +1439,7 @@ button:active {
 }
 
 .attendance-chart-card {
-     position: absolute;
+    position: absolute;
     top: 500px;
     left: 150px;
     width: 340px;
@@ -1458,4 +1451,118 @@ button:active {
 
 .attendance-chart-card h3 {
     margin-bottom: 20px;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    color: #ef4444;
+    text-decoration: none;
+    font-weight: 400;
+    transition: .3s;
+}
+
+.logout-btn:hover {
+    background: #fee2e2;
+    border-radius: 10px;
+}
+
+/* الخلفية */
+.popup-overlay {
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    display: flex;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s;
+    z-index: 99999;
+}
+
+/* عند الفتح */
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* النافذة */
+.logout-popup {
+    position: absolute;
+    top: 50px;
+    left: 500px;
+    padding: 30px;
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 340px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 30px;
+    text-align: center;
+    transform: scale(.8);
+    transition: .3s;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .25);
+}
+
+.popup-overlay.active .logout-popup {
+    transform: scale(1);
+}
+
+.logout-popup h2 {
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.logout-popup p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.popup-buttons a,
+.popup-buttons button {
+    flex: 1;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .25s;
+    text-decoration: none;
+}
+
+.cancel-btn {
+    background: #e5e7eb;
+}
+
+.cancel-btn:hover {
+    background: #d1d5db;
+}
+
+.logout-confirm {
+    background: #ef4444;
+    color: white;
+}
+
+.logout-confirm:hover {
+    background: #dc2626;
 }

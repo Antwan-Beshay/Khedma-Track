@@ -2,7 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta ="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+      content="Khedma Track is a church service management system for attendance, schedules, notifications and course management.">
     <meta
       name="keywords"
       content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"
@@ -27,22 +29,23 @@
     />
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script  src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
+    <main>
     
    
     <header>
       </center>
 
       <div class="lhead">
-        <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png')}}" alt="logo in head"  class="lhead">
+        <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png')}}" alt="logo in head"  class="lhead" >
       </div>
       
      <div>
-      <img src="{{ url_for('static', filename='img/Bell.png')}}" class="bell" id="bell">
+      <img src="{{ url_for('static', filename='img/Bell.png')}}" class="bell" id="bell"  alt="Notifications">
       {% if notification %}
       <div class="reddot"></div>
       
@@ -94,47 +97,84 @@
   <aside>
     <center>
 
-      <a href="{{ url_for('Dashboard') }}"
-   class="{% if title == 'Dashboard' %}active{% endif %}">
+      <a href="{{ url_for('Dashboard') }} " aria-label="Dashboard">
     <i class="bi bi-house" style="{% if request.endpoint == 'Dashboard' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}"  data-bs-toggle="tooltip"
        data-bs-placement="right"
        data-bs-title="Dashboard"> </i>
 </a>
 
-<a href="{{ url_for('coursess') }}"
-   class="{% if title == 'Courses' %}active{% endif %}">
+<a href="{{ url_for('coursess') }}" aria-label="coursess">
     <i class="bi bi-book" style="{% if request.endpoint == 'coursess' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" data-bs-toggle="tooltip"
        data-bs-placement="right"
        data-bs-title="All Courses"></i>
 </a>
 
-<a href="{{ url_for('Today') }}">
+<a href="{{ url_for('Today') }}"  aria-label="Today">
     <i class="bi bi-person-workspace" lass="bi bi-book" style="{% if request.endpoint == 'Today' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" data-bs-toggle="tooltip"
        data-bs-placement="right"
        data-bs-title="Today's Courses"></i>
 </a>
 
-<a href="{{ url_for('attendance') }}"
-   class="{% if title == 'Attendance' %}active{% endif %}">
+<a href="{{ url_for('attendance') }} " aria-label="attendance" >
     <i class="bi bi-calendar-check" style="{% if request.endpoint == 'attendance' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" title="attendance" data-bs-toggle="tooltip"
        data-bs-placement="right"
        data-bs-title="Attendance"></i>
 </a>
 
-<a href="{{ url_for('preparation') }}">
+<a href="{{ url_for('preparation') }}" aria-label="preparation"> 
     <i class="bi bi-journal-bookmark-fill"  style="{% if request.endpoint == 'preparation' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" data-bs-toggle="tooltip"
        data-bs-placement="right"
        data-bs-title="Preparation"></i>
 </a>
-<a href="{{ url_for('Profile') }}">
+<a href="{{ url_for('Profile') }}" aria-label="Profile">
     <i class="bi bi-person-fill" style="{% if request.endpoint == 'Profile' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" 
        data-bs-toggle="tooltip"
        data-bs-placement="right"
        data-bs-title="Profile"></i>
 </a>
 
+
+<a href="#" id="logoutBtn" aria-label="Logout">
+    <i class="bi bi-box-arrow-right"
+       style="color:#ef4444;"
+       data-bs-toggle="tooltip"
+       data-bs-placement="right"
+       data-bs-title="Logout">
+    </i>
+</a>
+
+
+    </div>
+
+</div>
     </center>
 </aside>
+
+<!-- Overlay -->
+<div class="popup-overlay" id="popupOverlay">
+    <center>
+    <div class="logout-popup">
+
+        <h2>Logout</h2>
+
+        <p>Are you sure you want to log out?</p>
+
+        <div class="popup-buttons">
+
+            <button class="cancel-btn" id="cancelBtn">
+                Cancel
+            </button>
+
+            <a href="{{ url_for('logout') }}" class="logout-confirm">
+                Logout
+            </a>
+
+        </div>
+        </div>
+        </center>
+        </div>
+        </main>
+
 
     {% block content %}
 
@@ -143,25 +183,52 @@
 {% endblock %}
 
 <script>
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 
-tooltipTriggerList.forEach(el => {
-    new bootstrap.Tooltip(el, {
-        delay: {
-            show: 300,
-            hide: 100
-        }
-    });
+        tooltipTriggerList.forEach(el => {
+            new bootstrap.Tooltip(el, {
+                delay: {
+                    show: 300,
+                    hide: 100
+                }
+            });
+        });
+
+        console.log("JavaScript Loaded");
+      document.getElementById('bell').onclick = function() {
+    var menu = document.getElementById('notification');
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
+    }
+};
+
+    const logoutBtn = document.getElementById("logoutBtn");
+const popup = document.getElementById("popupOverlay");
+const cancelBtn = document.getElementById("cancelBtn");
+
+logoutBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    popup.classList.add("active");
 });
 
-const links = document.querySelectorAll("aside a");
+cancelBtn.addEventListener("click", function(){
+    popup.classList.remove("active");
+});
 
-links.forEach(link => {
-    if (link.href === window.location.href) {
-        link.classList.add("active");
+popup.addEventListener("click", function(e){
+    if(e.target === popup){
+        popup.classList.remove("active");
+    }
+});
+
+document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+        popup.classList.remove("active");
     }
 });
 </script>
-
+    </main>
     </body>
     </html>
