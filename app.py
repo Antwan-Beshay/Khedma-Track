@@ -99,6 +99,71 @@ def get_db_connection():
     return conn
 
 
+def mark_absent_students():
+    conn = get_db_connection()
+
+    now = datetime.datetime.now()
+    current_day = now.strftime("%A")
+    current_time = now.strftime("%H:%M")
+    today = now.strftime("%Y-%m-%d")
+
+    # الكورسات التي انتهت اليوم
+    finished_courses = conn.execute("""
+        SELECT id, end_time
+        FROM coursess
+        WHERE day = ?
+        AND end_time <= ?
+    """, (current_day, current_time)).fetchall()
+
+    if not finished_courses:
+        conn.close()
+        return
+
+    # جميع الطلاب
+    students = conn.execute("""
+        SELECT id
+        FROM student
+        WHERE role = 'student' or role = 'Student'
+    """).fetchall()
+
+    for course in finished_courses:
+
+        for student in students:
+
+            # هل يوجد سجل لهذا الطالب في هذا الكورس اليوم؟
+            record = conn.execute("""
+                SELECT id
+                FROM attendance
+                WHERE student_id = ?
+                AND course_id = ?
+                AND attendance_date = ?
+            """, (
+                student["id"],
+                course["id"],
+                today
+            )).fetchone()
+
+            # إذا لم يوجد سجل، سجّل غياب
+            if record is None:
+
+                conn.execute("""
+                    INSERT INTO attendance
+                    (student_id,
+                     course_id,
+                     status,
+                     attendance_date,
+                     attendance_time)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (
+                    student["id"],
+                    course["id"],
+                    "Absent",
+                    today,
+                    course["end_time"]
+                ))
+
+    conn.commit()
+    conn.close()
 
 
 @app.route("/Login" , methods=["GET", "POST"] )
@@ -649,6 +714,7 @@ def require_login():
     if "username" not in session:
         session["next_url"] = request.url
         return redirect(url_for("login"))
+    mark_absent_students()
         
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
