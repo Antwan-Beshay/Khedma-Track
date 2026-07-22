@@ -572,7 +572,7 @@ def save_attendance():
             
 @app.route("/Dashboard")
 def Dashboard():
-    now = now_egypt()
+    now = datetime.datetime.now()
     current_day = now.strftime("%A")
     current_time = now.strftime("%H:%M")
     Email = session.get('mail') or session.get('email')
@@ -602,13 +602,12 @@ def Dashboard():
         ).replace(
             year=now.year,
             month=now.month,
-            day=now.day,
-            tzinfo=ZoneInfo("Africa/Cairo")
+            day=now.day
         )
         remaining = start_time - now
         remaining_seconds = int(remaining.total_seconds())
 
-    now = now_egypt()
+    now = datetime.datetime.now()
 
     notification = None
 
@@ -621,8 +620,7 @@ def Dashboard():
         ).replace(
             year=now.year,
             month=now.month,
-            day=now.day,
-            tzinfo=ZoneInfo("Africa/Cairo")
+            day=now.day
         )
 
         remaining = start_time - now
@@ -651,24 +649,38 @@ def Dashboard():
                     student_name=user,
                     course_name=next_course["Name"],
                     day=next_course["day"],
-                    time=next_course["start_time"],
-                    base_url=request.host_url
+                    time=next_course["start_time"]
                 )
 
                 session["email_sent"] = True
 
-    # بعد انتهاء الحصة نسمح بإرسال التذكير للحصة التالية
+    present = conn.execute("""
+    SELECT COUNT(*) FROM attendance
+    WHERE student_id = ? AND status = 'Attendance'
+    """, (session["id"],)).fetchone()[0]
+
+    absent = conn.execute("""
+    SELECT COUNT(*) FROM attendance
+    WHERE student_id = ? AND status = 'Absent'
+    """, (session["id"],)).fetchone()[0]
+    total = present + absent 
+    if total:
+        attendance_rate = round((present / total) * 100)
+    else:
+        attendance_rate = 0
+
+
     if remaining is not None and remaining <= datetime.timedelta(seconds=0):
         session["notification_sent"] = False
         session["email_sent"] = False
 
 
-
-
-
     user = session['username']
     return render_template("Dashboard.html",title="Dashboard",next_course=next_course,hours=f"{hours:02}",
-    minutes=f"{minutes:02}" , notification=notification , user=user,remaining_seconds=remaining_seconds)
+    minutes=f"{minutes:02}" , notification=notification , user=user, remaining_seconds=remaining_seconds,present=present,
+    absent=absent,attendance_rate=attendance_rate)
+
+
 
 
 
