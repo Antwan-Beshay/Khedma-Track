@@ -111,6 +111,7 @@
     updateTimer();
     setInterval(updateTimer,1000);
     </script>
+    {% endif %}
 
     <script>
     const ctx = document.getElementById('attendanceChart');
@@ -138,7 +139,7 @@
         }
     });
 </script>
-    {% endif %}
+    
     {% endblock %}
 
   </body>
