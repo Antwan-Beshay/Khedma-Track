@@ -37,6 +37,7 @@ CREATE TABLE write (
 
 
 
+
 connect.commit()
 connect.close()
 

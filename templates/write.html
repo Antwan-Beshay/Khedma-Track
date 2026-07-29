@@ -26,91 +26,114 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  
+  <body>
 
     <header>
-      </center>
-
       <div class="lhead">
-        <img src="{{ url_for('static', filename='img/TOP_logo-removebg-preview.png')}}" alt="logo in head"  class="lhead">
+        <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" alt="logo in head" class="lhead">
       </div>
-      
-     <div>
-      <img src="{{ url_for('static', filename='img/Bell.png')}}" class="bell" id="bell">
-    </div>
-     
-     
-     <p class="user" onclick="window.location.href='Profile.html'">{{ session.get("fname")}} {{session.get("lname")}} </p>
-     <div class="profile">
-      <img  src="{{ url_for('static', filename='img/profile.png')}}" alt="profile-icon" class="profile">
-     </div>
 
-  
-     </center>
+      <div>
+        <img src="{{ url_for('static', filename='img/Bell.png') }}" class="bell" id="bell">
+      </div>
+
+      <p class="user" onclick="window.location.href='Profile.html'">{{ session.get("fname") }} {{ session.get("lname") }}</p>
+
+      <div class="profile">
+        <img src="{{ url_for('static', filename='img/profile.png') }}" alt="profile-icon" class="profile">
+      </div>
     </header>
 
-    <section class="notification"  id="notification">
-      <div class="message"> <center><p class="content">Message</p></center></div>
-      <div class="delet">
-        <img src="{{ url_for('static', filename='img/delet.png')}}"  class="delet"> 
-      </div>
-      </section>
-      
+    <section class="notification" id="notification">
+      {% if notification %}
+        <div class="message">
+          <h4 class="content" id="notif-title">{{ notification.title }}</h4>
+          <p class="content" id="notif-message">{{ notification.message }}</p>
+        </div>
+
+        <button class="delete" type="button">
+          <img src="{{ url_for('static', filename='img/delet.png') }}" alt="delete" class="delet">
+        </button>
+      {% else %}
+        <div>
+          <center>
+            <p class="No">No notifications.</p>
+          </center>
+        </div>
+      {% endif %}
+    </section>
+
     <aside>
       <center>
-      <button  class="butn">☰</button>
-    <a href="{{url_for('write')}}">
-        <i class="bi bi-journal-check"></i>
-    </a>
-    </center>
+        <a href="{{ url_for('write') }}">
+          <i class="bi bi-journal-check"
+             style="{% if request.endpoint == 'write' %}color:#0066cc;{% else %}color:#1e293b;{% endif %}"
+             data-bs-toggle="tooltip"
+             data-bs-placement="right"
+             data-bs-title="Write a post for students"></i>
+        </a>
+      </center>
     </aside>
 
     {% if message %}
-        <div class="true">
-            {{message}}
-        </div>
-        {% endif %}
+      <div class="true">{{ message }}</div>
+    {% endif %}
 
     {% if fmessage %}
-        <div class="danger">
-            {{fmessage}}
-        </div>
-        {% endif %}
+      <div class="danger">{{ fmessage }}</div>
+    {% endif %}
 
-
-  
     <form method="POST"
           enctype="multipart/form-data"
           action="{{ url_for('write') }}"
           class="write">
 
-           {{ post.hidden_tag() }} 
+      {{ post.hidden_tag() }}
 
-        {{ post.Title.label(for='Title', class='write-label') }}
-        {{ post.Title(id='Title', class='write-input', placeholder='Ente The Title') }}
-      
+      {{ post.Title.label(for='Title', class='write-label') }}
+      {{ post.Title(id='Title', class='write-input', placeholder='Ente The Title') }}
 
-       {{ post.content.label(for='content', class='write-label') }}
-       {{ post.content(id='content', class='write-input', placeholder='Enter the content') }}
-      
-    <div class="upload">
-    <label for="image" class="upload-box">
-        <i class="bi bi-cloud-upload-fill"></i>
-        <p>Choose Image</p>
-    </label>
+      {{ post.content.label(for='content', class='write-label') }}
+      {{ post.content(id='content', class='write-input', placeholder='Enter the content') }}
 
-    {{ post.image(id="image", class="upload-input") }}
-</div>
+      <div class="upload">
+        <label for="image" class="upload-box">
+          <i class="bi bi-cloud-upload-fill"></i>
+          <p>Choose Image</p>
+        </label>
+        {{ post.image(id="image", class="upload-input") }}
+      </div>
 
-    {{ post.submit(class='login-btn') }}
-    
+      {{ post.submit(class='login-btn') }}
 
     </form>
 
+    <script>
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+      tooltipTriggerList.forEach(el => {
+        new bootstrap.Tooltip(el, {
+          delay: { show: 100, hide: 100 }
+        });
+      });
 
+      console.log("JavaScript Loaded");
 
+      const bell = document.getElementById('bell');
+      const notifMenu = document.getElementById('notification');
+
+      if (bell && notifMenu) {
+        bell.addEventListener('click', function () {
+          if (notifMenu.style.display === "none" || notifMenu.style.display === "") {
+            notifMenu.style.display = "block";
+          } else {
+            notifMenu.style.display = "none";
+          }
+        });
+      } else {
+        console.error("bell or notification element not found in DOM");
+      }
+    </script>
   </body>
 </html>
-  

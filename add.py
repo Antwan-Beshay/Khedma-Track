@@ -37,9 +37,9 @@ courses_data = [
 
     # Wednesday
     ("Joint Theater", "Wednesday", "12:00", "15:00", "bi bi-theater-masks"),
-    ("Joint Theater", "Wednesday", "18:00", "21:00", "bi bi-theater-masks"),
-    ("Joint Choir", "Wednesday", "18:30", "21:00", "bi bi-music-note-list"),
-    ("Joint Literature & Culture (Research)", "Wednesday", "19:00", "21:00", "bi bi-book-half"),
+    ("Joint Theater", "Wednesday", "18:00", "19:40", "bi bi-theater-masks"),
+    ("Joint Choir", "Wednesday", "18:30", "21:20", "bi bi-music-note-list"),
+    ("Joint Literature & Culture (Research)", "Wednesday", "19:00", "21:20", "bi bi-book-half"),
 
     # Thursday
     ("Joint Hymns", "Thursday", "13:00", "15:00", "bi bi-music-note"),
