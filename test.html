@@ -1,24 +1,8 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.header import Header
-
-# بيانات الحساب
-sender_email = "antwanbeshay260@gmail.com"
-app_password = "sgan xoca eogb bqdo"   # ضع App Password الخاص بك هنا
-receiver_email = "antwanbeshay260@gmail.com"
-
-# بيانات الطالب والحصة
-student_name = "Ant"
-course_name = "Programming"
-day = "Sunday"
-time = "9:00 AM"
-
-subject = "Reminder: Your class starts in 15 minutes"
-body = f"""
-    <!DOCTYPE html>
+ <!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body style="
@@ -39,6 +23,7 @@ body = f"""
             box-shadow:0 20px 50px rgba(30,58,95,0.18);
         ">
 
+            <!-- استبدال الأيقونة بكود SVG متوافق مع كافة برامج الإيميل -->
             <div style="
                 width:80px;
                 height:80px;
@@ -46,10 +31,14 @@ body = f"""
                 border-radius:50%;
                 background:#eef4ff;
                 border:2px solid #1E3A5F;
-                line-height:80px;
-                font-size:40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             ">
-                🔒
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16">
+  <path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"/>
+  <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+</svg>
             </div>
 
             <h2 style="
@@ -122,22 +111,3 @@ body = f"""
 
     </body>
     </html>
- """
-# إنشاء الرسالة
-msg = MIMEText(body, "html", "utf-8")
-msg["Subject"] = Header(subject, "utf-8")
-msg["From"] = sender_email
-msg["To"] = receiver_email
-
-# إرسال البريد
-try:
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
-        server.starttls()
-        server.login(sender_email, app_password)
-        server.sendmail(sender_email, receiver_email, msg.as_string())
-
-    print("✅ Email sent successfully!")
-
-except Exception as e:
-    print("❌ Failed to send email:")
-    print(e)

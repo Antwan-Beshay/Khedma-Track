@@ -16,7 +16,7 @@ class postform(FlaskForm):
 
     image = FileField(
         "Image",
-        validators=[FileRequired()]
+        validators=[FileRequired(message="Please select an image.")]
     )
 
     submit = SubmitField("Publish")

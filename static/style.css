@@ -1,34 +1,18 @@
 :root {
-    /* الألوان الرئيسية */
     --primary-color: #0066cc;
-    /* أزرق ملكي مريح للعين */
     --primary-hover: #0052a3;
-    /* أزرق داكن عند تمرير الماوس */
     --secondary-color: #4a5568;
-    /* رمادي داكن للنصوص الثانوية */
 
-    /* ألوان التنبيه والاتخاذ إجراء (CTA) */
     --action-color: #ff9900;
-    /* برتقالي حيوي للأزرار الهامة */
     --success-color: #2ec4b6;
-    /* أخضر للعمليات الناجحة */
     --danger-color: #ff1900;
-    /* أحمر للأخطاء أو الإلغاء */
 
-    /* الخلفيات والمساحات */
     --bg-main: #f8fafc;
-    /* خلفية النظام الأساسية */
     --bg-card: #ffffff;
-    /* خلفية البطاقات والقوائم */
     --text-main: #1e293b;
-    /* لون النص الأساسي (كحلي قارب للأسود) */
     --border-color: #e2e8f0;
-    /* لون الحواف والخطوط الفاصلة */
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
 body {
     background-color: var(--bg-main);
@@ -36,6 +20,10 @@ body {
     margin: 0;
     padding: 0;
 }
+html {
+    scroll-behavior: smooth;
+}
+
 
 .loader {
 
@@ -183,6 +171,8 @@ body {
 }
 
 .login-btn {
+    display: inline-block;
+    width: 200px;
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 5px;
@@ -205,13 +195,13 @@ body {
     background-color: var(--primary-hover);
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
-    transform: scale(1.1);
+    transform: scale(1.01);
 
 }
 
 .login-btn:active {
     background-color: var(--primary-hover);
-    transform: scale(1.2);
+    transform: scale(1.02);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
@@ -393,25 +383,46 @@ body {
     }
 }
 
-
-
 .danger {
-    text-align: center;
-    font-size: 15px;
-    font-weight: bolder;
-    padding: 5px;
-    padding-top: 5px;
+    
     position: fixed;
     top: 5px;
     left: 76%;
     width: auto;
-    background-color: var(--danger-color);
-    color: #ffffff;
-    animation: fadeOut 5s forwards;
+    
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: #fff1f1;
+    color: #d32f2f;
+    border: 1px solid #ffcdd2;
+
+    padding: 14px 18px;
+    margin: 15px 0;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+
+    animation:
+            showMessage 0.9s ease forwards,
+            fadeOut 0.5s ease 4s forwards;
 }
 
-.error {
-    display: inline-block;
+@keyframes showMessage {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -419,19 +430,18 @@ body {
 @keyframes fadeOut {
     0% {
         opacity: 1;
+        transform: translateY(0px);
     }
 
-    /* يظهر بوضوح في البداية */
     85% {
         opacity: 1;
+        transform: translateY(0px);
     }
 
-    /* يظل ثابتاً وواضحاً حتى الثواني الأخيرة */
     100% {
         opacity: 0;
-        /* يتلاشى تماماً عند نهاية الـ 5 ثوانٍ */
         pointer-events: none;
-        /* يمنع التفاعل معه بعد الاختفاء */
+        transform: translateY(-8px);
     }
 }
 
@@ -1547,3 +1557,168 @@ button:active {
 .logout-confirm:hover {
     background: #dc2626;
 }
+
+
+ .forgot-box {
+     box-sizing: border-box;
+     margin-top: 50px;
+     padding: 0;
+     width: 100%;
+     max-width: 420px;
+     background: white;
+     padding: 35px;
+     border-radius: 16px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+ }
+
+  .forgot-box h2 {
+     text-align: center;
+     color: #24324a;
+     margin-bottom: 10px;
+ }
+
+ .description {
+     text-align: center;
+     color: #777;
+     font-size: 14px;
+     margin-bottom: 25px;
+     line-height: 1.6;
+ }
+
+ .form-group {
+     margin-bottom: 20px;
+ }
+
+ label {
+     display: block;
+     margin-bottom: 8px;
+     color: #333;
+     font-weight: bold;
+ }
+
+ input {
+     width: 100%;
+     padding: 13px 15px;
+     border: 1px solid #ddd;
+     border-radius: 10px;
+     font-size: 15px;
+     outline: none;
+     transition: 0.3s;
+ }
+
+ input:focus {
+     border-color: #4a6cf7;
+     box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+ }
+
+ button {
+     width: 100%;
+     padding: 13px;
+     border: none;
+     border-radius: 10px;
+     background: #4a6cf7;
+     color: white;
+     font-size: 16px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: 0.3s;
+ }
+
+ button:hover {
+     background: #3557d6;
+ }
+
+ .back-login {
+     display: block;
+     text-align: center;
+     margin-top: 20px;
+     color: #4a6cf7;
+     text-decoration: none;
+     font-size: 14px;
+ }
+
+ .back-login:hover {
+     text-decoration: underline;
+ }
+
+.stats {
+     width: 100%;
+     max-width: 900px;
+     margin: 30px auto;
+
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 20px;
+ }
+
+
+ /* Total Users */
+ .total-card {
+     grid-column: 1 / -1;
+ }
+
+
+ /* Cards */
+ .stat-card {
+     background: #ffffff;
+
+     border: 1px solid #e5e7eb;
+     border-radius: 16px;
+
+     padding: 25px;
+
+     display: flex;
+     align-items: center;
+     gap: 18px;
+
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+     transition: 0.25s ease;
+ }
+
+ .stat-card:hover {
+     transform: translateY(-3px);
+     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+ }
+
+
+
+
+
+ .stat-info {
+     display: flex;
+     flex-direction: column;
+     gap: 5px;
+ }
+
+ .stat-info h3 {
+     margin: 0;
+
+     font-size: 15px;
+     font-weight: 600;
+
+     color: #6b7280;
+ }
+
+ .stat-info p {
+     margin: 0;
+
+     font-size: 28px;
+     font-weight: 700;
+
+     color: #111827;
+ }
+
+
+ @media (max-width: 600px) {
+
+     .stats {
+         grid-template-columns: 1fr;
+     }
+
+     .total-card {
+         grid-column: auto;
+     }
+
+ }
+

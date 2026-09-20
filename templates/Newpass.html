@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"/>
+    <meta name="author" content="Antwan Beshay" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#1E3A5F" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title>Sps - {{ title }}</title>
+    {% else %}
+    <title>Sps</title>
+    {% endif %}
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+
+
+<body>
+
+{% if message %}
+
+        <div class="danger">
+            
+        {{message}}
+        </div>
+        
+{% endif %}
+
+    <div class="forgot-box">
+
+        <h2>Reset Password</h2>
+
+        <p class="description">
+            Enter your new password and confirm it to reset your password.
+        </p>
+
+        <form method="POST" action="{{ url_for('reset_password') }}">
+                {{ form.hidden_tag() }}
+
+
+            <div class="form-group">
+
+                <label for="email">Email Address</label>
+
+
+            
+
+            </div>
+
+        {{ form.password.label(for='email', class='form-label') }}
+        {{ form.password(id='email', class='form-input', placeholder='New Password') }}
+        
+        {% if form.password.errors %}
+            {% for error in form.password.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+        {% endif %}
+
+        {{ form.confirm_password.label(for='email', class='form-label') }}
+        {{ form.confirm_password(id='email', class='form-input', placeholder='Confirm New Password') }}
+        
+        {% if form.confirm_password.errors %}
+        {% for error in form.confirm_password.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+        {% endif %}
+
+        <center>
+        {{ form.submit(class='login-btn') }}
+        </center>
+
+        </form>
+
+     
+
+    </div>
+
+</body>
+
+
+

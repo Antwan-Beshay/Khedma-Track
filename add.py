@@ -3,17 +3,17 @@ import sqlite3
 connect = sqlite3.connect("database.db")
 cursor = connect.cursor()
 
-# حذف البيانات القديمة (اختياري)
+# حذف البيانات القديمة 
 cursor.execute("DELETE FROM coursess")
 
 courses_data = [
     # Saturday
     ("3rd Preparatory Girls' Scouts", "Saturday", "10:00", "13:00", "bi bi-compass"),
-    ("Joint Theater", "Saturday", "10:00", "13:00", "bi bi-theater-masks"),
+    ("Joint Theater", "Saturday", "10:00", "14:00", "bi bi-theater-masks"),
     ("Joint Media", "Saturday", "13:00", "15:00", "bi bi-camera-reels"),
-    ("Joint Programming & Computer", "Saturday", "15:00", "17:00", "bi bi-code-slash"),
-    ("Joint Coptic", "Saturday", "17:00", "19:00", "bi bi-translate"),
-    ("Joint Theater", "Saturday", "18:00", "21:00", "bi bi-theater-masks"),
+    ("Joint Programming & Computer", "Saturday", "15:20", "17:00", "bi bi-code-slash"),
+    ("Joint Coptic", "Saturday", "17:15", "19:00", "bi bi-translate"),
+    ("Joint Theater", "Saturday", "17:30", "21:00", "bi bi-theater-masks"),
     ("Joint Choir", "Saturday", "19:00", "21:00", "bi bi-music-note-list"),
 
     # Sunday
@@ -50,8 +50,8 @@ courses_data = [
     # Friday
     ("Joint Coptic", "Friday", "09:00", "11:00", "bi bi-translate"),
     ("Girls' Chess", "Friday", "17:00", "19:00", "bi bi-trophy"),
-    ("Girls' Chess", "Friday", "19:00", "21:00", "bi bi-trophy"),
-    ("Joint Fine Arts", "Friday", "19:00", "21:00", "bi bi-brush"),
+    ("Girls' Chess", "Friday", "19:00", "22:00", "bi bi-trophy"),
+    ("Joint Fine Arts", "Friday", "19:00", "22:00", "bi bi-brush"),
 ]
 
 cursor.executemany(

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        *{
+            font-family: "Cairo", sans-serif;
+        }
+
+        body{
+            background:#f4f7fc;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .box{
+            background:#fff;
+            width:550px;
+            max-width:90%;
+            padding:40px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,.1);
+        }
+
+        .icon{
+            font-size:90px;
+        }
+
+        h1{
+            color:#dc3545;
+            font-weight:bold;
+            margin:15px 0;
+        }
+
+        p{
+            color:#1e293b;
+            font-size:25px;
+            margin-bottom:30px;
+        }
+
+        .primary{
+            text-decoration:none;
+            border:1px solid #1e293b;
+            font-size:30px;
+            background:#1e293b;
+            color:#fff;
+            width:100%;
+            border-radius:12px;
+            padding:12px;
+        }
+        .primary:hover{
+            background:#1e293b;
+            color:#fff;
+            border:1px solid #1e293b;
+            box-shadow:0 10px 30px rgba(0,0,0,.1);
+        }
+        .primary:focus{
+            outline:none;
+            background:#1e293b;
+            color:#fff;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="box">
+
+    <div class="icon">🚫</div>
+
+    <h1>403</h1>
+
+    <p>
+       there is a problem with your request. You do not have permission to access this page.
+    </p>
+
+   {% if session.get("role") == "teacher" %} 
+<a href="{{ url_for('Teacher') }}" class="primary"> back to home 
+</a> 
+{% elif session.get("role") == "student" %}
+ <a href="{{ url_for('Dashboard') }}" class="primary"> back to home 
+ </a>
+ {% elif session.get("role") == "Admin" %} 
+ <a href="{{ url_for('admin') }}" class="primary"> back to home 
+ </a>
+ {% else %} 
+ <a href="{{ url_for('login') }}" class="primary"> log in 
+ </a> 
+ {% endif %}
+</div>
+
+</body>
+</html>

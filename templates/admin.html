@@ -1,0 +1,48 @@
+
+{% extends "Base.html" %}
+
+{% block content %}
+
+<section class="stats">
+
+    <!-- Total Users -->
+    <div class="stat-card total-card">
+        <div class="stat-icon">
+            <i class="bi bi-people-fill"></i>
+        </div>
+
+        <div class="stat-info">
+            <h3>Total Users</h3>
+            <p>{{ total }}</p>
+        </div>
+    </div>
+
+
+    <!-- Students -->
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="bi bi-mortarboard-fill"></i>
+        </div>
+
+        <div class="stat-info">
+            <h3>Students</h3>
+            <p>{{ cstudent }}</p>
+        </div>
+    </div>
+
+
+    <!-- Teachers -->
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="bi bi-person-workspace"></i>
+        </div>
+
+        <div class="stat-info">
+            <h3>Teachers</h3>
+            <p>{{ cTeacher }}</p>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

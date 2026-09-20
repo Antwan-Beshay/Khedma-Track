@@ -1,0 +1,45 @@
+{% extends "Base.html" %}
+
+{% block content %}
+{% if message %}
+<div class="danger">
+    {{message}}
+</div>
+{% endif %}
+<form method="POST" enctype="multipart/form-data" action="{{ url_for('Awrite') }}" class="write">
+
+    {{ post.hidden_tag() }}
+
+    {{ post.Title.label(for='Title', class='write-label') }}
+    {{ post.Title(id='Title', class='write-input', placeholder='Ente The Title') }}
+
+    {% if post.Title.errors %}
+    {% for error in post.Title.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+    {% endif %}
+
+    {{ post.content.label(for='content', class='write-label') }}
+    {{ post.content(id='content', class='write-input', placeholder='Enter the content') }}
+
+    {% if post.content.errors %}
+    {% for error in post.content.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+    {% endif %}
+
+    <div class="upload">
+        <label for="image" class="upload-box">
+            <i class="bi bi-cloud-upload-fill"></i>
+            <p>Choose Image</p>
+        </label>
+        {{ post.image(id="image", class="upload-input") }}
+
+        {% if post.image.errors %}
+        {% for error in post.image.errors %}<span class="field-error">{{ error }}</span>{% endfor %}
+        {% endif %}
+    </div>
+
+    {{ post.submit(class='login-btn') }}
+
+</form>
+
+</body>
+
+{% endblock %}

@@ -1,10 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description"
-      content="Khedma Track is a church service management system for attendance, schedules, notifications and course management.">
     <meta
       name="keywords"
       content="نظام تحضير الخدمة, خدمة الكنيسة, إدارة الخدام, نظام إدارة الكنيسة, تحضير الدروس, مدارس الأحد, جدول الخدمة, حضور الخدام, إدارة الفصول, Church Service Preparation System, Church Management System, Sunday School Management, Volunteer Management, Service Scheduling, Lesson Preparation, Attendance System, Django Project, Bootstrap Dashboard"
@@ -27,109 +25,76 @@
       type="text/css"
       href="{{ url_for('static', filename='style.css') }}"
     />
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
-<script  src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    
-   
+
     <header>
-      </center>
-
-      <div class="lhead">
-        <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png')}}" alt="logo in head"  class="lhead" >
+      <div class="lhead-wrap">
+        <img src="{{ url_for('static', filename='img/Top_logo-removebg-preview.png') }}" alt="logo in head" class="lhead">
       </div>
-      
-     <div>
-      <img src="{{ url_for('static', filename='img/Bell.png')}}" class="bell" id="bell"  alt="Notifications">
-      {% if notification %}
-      <div class="reddot"></div>
-      
-       {% endif %}
 
-    </div>
-     
-     
-     <a class="user" href='{{url_for("Profile")}}'>{{ session.get("fname")}} {{session.get("lname")}} 
-     <div class="profile">
-      <img  src="{{ url_for('static', filename='img/profile.png')}}" alt="profile-icon" class="profile">
-     </div>
-     </a>
-  
-     </center>
+      <div>
+        <img src="{{ url_for('static', filename='img/Bell.png') }}" class="bell" id="bell" alt="Notifications">
+        {% if notification %}
+        <div class="reddot" id="reddot"></div>
+        {% endif %}
+      </div>
+
+      <a class="user" href='{{ url_for("TProfile") }}'>
+        {{ session.get("fname") }} {{ session.get("lname") }}
+        <i class="bi bi-chevron-left"></i>
+        <div class="profile-wrap">
+          <img src="{{ url_for('static', filename='img/profile.png') }}" alt="profile-icon" class="profile">
+        </div>
+      </a>
+
     </header>
 
-  
-     <section class="notification" id="notification">
+    <section class="notification" id="notification">
 
-    {% if notification %}
+      {% if notification %}
 
+        <div class="message" data-notification-id="{{ notification.id }}">
+          <h4 class="content" id="notif-title">{{ notification.title }}</h4>
 
-        <div class="message">
-            <h4 class="content" id="notif-title">{{ notification.title }}</h4>
-
-            <p class="content" id="notif-message">
-            
-                {{ notification.message }}
-            </p>
+          <p class="content" id="notif-message">
+            {{ notification.message }}
+          </p>
         </div>
 
-        <button class="delete" type="button">
-            <img src="{{ url_for('static', filename='img/delet.png') }}" alt="delete" class="delet" >
+        <button class="delete" type="button" id="delete-notification">
+          <img src="{{ url_for('static', filename='img/delet.png') }}" alt="delete" class="delet">
         </button>
 
-    {% else %}
+      {% else %}
 
         <div class="">
-            <center>
+          <center>
             <p class="No">No notifications.</p>
-            </center>
+          </center>
         </div>
 
-    {% endif %}
+      {% endif %}
 
-</section>
-      
-  <aside>
-    <center>
+    </section>
 
-      <a href="{{ url_for('Dashboard') }} " aria-label="Dashboard">
-    <i class="bi bi-house" style="{% if request.endpoint == 'Dashboard' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}"  data-bs-toggle="tooltip"
-       data-bs-placement="right"
-       data-bs-title="Dashboard"> </i>
-</a>
+    <aside>
+      <center>
+        <a href="{{ url_for('write') }}">
+          <i class="bi bi-journal-check"
+             style="{% if request.endpoint == 'write' %}color:#0066cc;{% else %}color:#1e293b;{% endif %}"
+             data-bs-toggle="tooltip"
+             data-bs-placement="right"
+             data-bs-title="Write a post for students"></i>
+        </a>
 
-<a href="{{ url_for('coursess') }}" aria-label="coursess">
-    <i class="bi bi-book" style="{% if request.endpoint == 'coursess' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" data-bs-toggle="tooltip"
-       data-bs-placement="right"
-       data-bs-title="All Courses"></i>
-</a>
-
-<a href="{{ url_for('Today') }}"  aria-label="Today">
-    <i class="bi bi-person-workspace" lass="bi bi-book" style="{% if request.endpoint == 'Today' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" data-bs-toggle="tooltip"
-       data-bs-placement="right"
-       data-bs-title="Today's Courses"></i>
-</a>
-
-<a href="{{ url_for('attendance') }} " aria-label="attendance" >
-    <i class="bi bi-calendar-check" style="{% if request.endpoint == 'attendance' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" title="attendance" data-bs-toggle="tooltip"
-       data-bs-placement="right"
-       data-bs-title="Attendance"></i>
-</a>
-
-<a href="{{ url_for('preparation') }}" aria-label="preparation"> 
-    <i class="bi bi-journal-bookmark-fill"  style="{% if request.endpoint == 'preparation' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" data-bs-toggle="tooltip"
-       data-bs-placement="right"
-       data-bs-title="Preparation"></i>
-</a>
-<a href="{{ url_for('Profile') }}" aria-label="Profile">
-    <i class="bi bi-person-fill" style="{% if request.endpoint == 'Profile' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" 
+        <a href="{{ url_for('TProfile') }}" aria-label="Profile">
+    <i class="bi bi-person-fill" style="{% if request.endpoint == 'TProfile' %}color:#0066cc;{% else %}color: #1e293b;{% endif %}" 
        data-bs-toggle="tooltip"
        data-bs-placement="right"
-       data-bs-title="Profile"></i>
+       data-bs-title="Teacher Profile"></i>
 </a>
 
 
@@ -141,6 +106,7 @@
        data-bs-title="Logout">
     </i>
 </a>
+
 <a href="#" id="deleteAccountBtn" aria-label="Delete Account">
     <i class="bi bi-person-x"
        style="color:#ef4444;"
@@ -149,15 +115,9 @@
        data-bs-title="Delete Account">
     </i>
 </a>
+      </center>
+    </aside>
 
-
-    </div>
-
-</div>
-    </center>
-</aside>
-
-<!-- Overlay -->
 <div class="popup-overlay" id="popupOverlay">
     <center>
     <div class="logout-popup">
@@ -181,8 +141,7 @@
         </center>
         </div>
 
-
-    <div class="popup-overlay" id="deletePopupOverlay">
+         <div class="popup-overlay" id="deletePopupOverlay">
     <center>
         <div class="logout-popup">
             <h2>Delete Account</h2>
@@ -203,28 +162,22 @@
         </div>
     </center>
 </div>
-        
-        </main>
-
 
     {% block content %}
+    {% endblock %}
 
     
+  <script>
 
-{% endblock %}
-
-<script>
+  document.addEventListener('DOMContentLoaded', () => {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(el => {
+      new bootstrap.Tooltip(el, { delay: { show: 100, hide: 100 } });
+    });
+  });
 
-        tooltipTriggerList.forEach(el => {
-            new bootstrap.Tooltip(el, {
-                delay: {
-                    show: 100,
-                    hide: 100
-                }
-            });
-        });
 
+  
         console.log("JavaScript Loaded");
       document.getElementById('bell').onclick = function() {
     var menu = document.getElementById('notification');
@@ -260,8 +213,6 @@ document.addEventListener("keydown", function(e){
     }
 });
 
-
-
 const deleteAccountBtn = document.getElementById("deleteAccountBtn");
 const deletePopup = document.getElementById("deletePopupOverlay");
 const deleteCancelBtn = document.getElementById("deleteCancelBtn");
@@ -288,6 +239,8 @@ document.addEventListener("keydown", function(e) {
     }
 });
 </script>
-    </main>
-    </body>
-    </html>
+
+
+
+  </body>
+</html>

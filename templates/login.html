@@ -58,7 +58,12 @@
                     {% endif %}
                 {{ form. submit(class='login-btn') }}
                 <br>
-                <p class="Already"> Do not have  an account <a href="{{ url_for('register')}}" class="login">Sign up</p>
+                <p class="Already"> Do not have  an account <a href="{{ url_for('register')}}" class="login">Sign up</p> </a>
+                <p class="Already"> Forgot your password? 
+                    <a href="{{ url_for('forgot_password')}}" class="login">
+                        Reset Password 
+                    </a>
+                </p> 
             </form>
         </div>
     </center>
