@@ -1285,8 +1285,9 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(attande, 'interval', minutes=1)
 scheduler.start()
 
-app.run(
-    debug=True,
-    use_debugger=False,
-    use_reloader=False
-)
+if __name__ == '__main__':
+    app.run(
+        debug=True,
+        use_debugger=False,
+        use_reloader=False
+    )
