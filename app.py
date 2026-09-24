@@ -245,15 +245,15 @@ def Main():
     return render_template("main.html", title="Main")
 
 
-
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.path.join(BASE_DIR, "database.db")
 
 
 def get_db_connection():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(DATABASE)
     conn.execute("PRAGMA foreign_keys = ON;")
     conn.row_factory = sqlite3.Row
     return conn
-
 
 
 @app.route("/Login" , methods=["GET", "POST"] )
@@ -411,7 +411,7 @@ def register():
     
         try:
             hashed_password = generate_password_hash(form.password.data)
-            conect = sqlite3.connect("database.db")
+            conect = sqlite3.connect(DATABASE)
             cursor = conect.cursor()
             cursor.execute("insert into student (fname ,  lname , uname ,email, password, role , qr_token) Values(?, ?, ?, ?, ?, ?, ?)",(form.fname.data ,form.lname.data, form.uname.data ,form.email.data , hashed_password, form.role.data,token))
             conect.commit()
