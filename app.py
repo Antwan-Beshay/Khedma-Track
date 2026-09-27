@@ -16,7 +16,8 @@ from email.mime.text import MIMEText
 from email.header import Header
 import os
 from dotenv import load_dotenv
-load_dotenv("secret.env")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, "secret.env"))
 from werkzeug.middleware.proxy_fix import ProxyFix
 from apscheduler.schedulers.background import BackgroundScheduler
 from werkzeug.security import generate_password_hash, check_password_hash
