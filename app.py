@@ -1277,12 +1277,23 @@ def require_login():
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(attande, 'interval', minutes=1)
-scheduler.add_job(check_and_send_reminders, 'interval', minutes=1)
-scheduler.start()
 
-scheduler = BackgroundScheduler()
-scheduler.add_job(attande, 'interval', minutes=1)
+scheduler.add_job(
+    attande,
+    'interval',
+    minutes=1,
+    id='attendance_job',
+    replace_existing=True
+)
+
+scheduler.add_job(
+    check_and_send_reminders,
+    'interval',
+    minutes=1,
+    id='reminder_job',
+    replace_existing=True
+)
+
 scheduler.start()
 
 if __name__ == '__main__':
